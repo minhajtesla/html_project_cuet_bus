@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CUET Transport | Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="navbar.css" />
+</head>
+<body>
+
+  <!-- Navbar will be loaded here -->
+  <div id="navbar-placeholder"></div>
+
+  <main style="margin-top: 100px;">
+    <h1>Welcome to CUET Transport App</h1>
+    <p>This is the homepage content.</p>
+  </main>
+
+  <script>
+    // Dynamically load navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      });
+  </script>
+
+</body>
+</html>

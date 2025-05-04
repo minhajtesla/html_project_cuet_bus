@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUET Transport</title>
+  <link rel="stylesheet" href="Homepage.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+</head>
+<body>
+
+  <main class="homepage">
+    <!-- Hero Carousel -->
+    <section class="hero">
+      <div class="swiper-container hero-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" style="background-image: url('/images/hero1.jpg');"></div>
+          <div class="swiper-slide" style="background-image: url('/images/hero2.jpg');"></div>
+          <div class="swiper-slide" style="background-image: url('/images/hero3.jpg');"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content fade-in">
+        <h1>Welcome to CUET Transport</h1>
+        <p>Reliable schedules and seat booking, right at your fingertips.</p>
+        <a href="/bus-stopages">
+          <button class="button">Explore Stopages</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Feature Grid -->
+    <section class="features container fade-in">
+      <a href="/mission" class="card">
+        <h3>Our Mission</h3>
+        <p>Learn about our vision and roadmap.</p>
+      </a>
+      <a href="/buses" class="card">
+        <h3>Bus Fleet</h3>
+        <p>Explore our latest models and specs.</p>
+      </a>
+      <a href="/notice" class="card">
+        <h3>Notices</h3>
+        <p>Stay updated with the latest announcements.</p>
+      </a>
+      <a href="/login" class="card">
+        <h3>Login / Register</h3>
+        <p>Access your account or sign up.</p>
+      </a>
+    </section>
+
+    <!-- Map Section -->
+    <section class="homepage-map card fade-in">
+      <h2>Select a Bus Station</h2>
+      <select class="station-dropdown" id="station-select">
+        <option value="1">CUET Main Gate</option>
+        <option value="2">Reservoir Stop</option>
+        <option value="3">Faculty Dorms</option>
+        <option value="4">Library Roundabout</option>
+      </select>
+      <div class="map-container" id="map"></div>
+      <div class="station-info">
+        <h3 id="station-name">CUET Main Gate</h3>
+        <img id="station-image" src="/images/stations/cuet-main.jpg" alt="CUET Main Gate" class="station-image">
+      </div>
+    </section>
+
+    <!-- About & Contact -->
+    <section class="info container fade-in">
+      <div class="about">
+        <h2>About CUET</h2>
+        <p>
+          CUET is a premier institution dedicated to engineering excellence,
+          fostering innovation and community engagement.
+        </p>
+      </div>
+      <div class="contact">
+        <h2>Contact Us</h2>
+        <p>Email: info@cuet.ac.bd</p>
+        <p>Phone: +880 31 710236</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Initialize Google Map
+    function initMap() {
+      const busStations = [
+        { id: 1, name: 'CUET Main Gate', position: { lat: 22.4619433, lng: 91.9710592 }, image: '/images/stations/cuet-main.jpg' },
+        { id: 2, name: 'Reservoir Stop', position: { lat: 22.4605, lng: 91.9687 }, image: '/images/stations/reservoir.jpg' },
+        { id: 3, name: 'Faculty Dorms', position: { lat: 22.4592, lng: 91.9701 }, image: '/images/stations/dorms.jpg' },
+        { id: 4, name: 'Library Roundabout', position: { lat: 22.4623, lng: 91.9690 }, image: '/images/stations/library.jpg' }
+      ];
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: busStations[0].position,
+        zoom: 16
+      });
+
+      const marker = new google.maps.Marker({
+        position: busStations[0].position,
+        map: map
+      });
+
+      document.getElementById("station-select").addEventListener('change', function () {
+        const selectedStation = busStations.find(s => s.id === parseInt(this.value));
+        map.setCenter(selectedStation.position);
+        marker.setPosition(selectedStation.position);
+        document.getElementById("station-name").textContent = selectedStation.name;
+        document.getElementById("station-image").src = selectedStation.image;
+      });
+    }
+
+    window.onload = initMap;
+  </script>
+</body>
+</html>
