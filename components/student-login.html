@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Student Login</h2>
+    <form action="/student-dashboard" method="POST">
+      <label for="student-id">Student ID</label>
+      <input type="text" id="student-id" name="studentId" required>
+      
+      <label for="student-password">Password</label>
+      <input type="password" id="student-password" name="password" required>
+      
+      <button type="submit">Log In</button>
+    </form>
+    <a href="Homepage.html" class="back-link">&larr; Back to Home</a>
+  </div>
+</body>
+</html>

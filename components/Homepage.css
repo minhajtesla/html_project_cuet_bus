@@ -72,7 +72,40 @@
     background: var(--accent-amber);
     transform: translateY(-3px);
   }
+  .login.login-register {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    margin-left: 200px;
+  }
   
+  .login-register .card {
+    display: block;
+    text-align: center;
+    background-color: #007bff; /* Primary blue color */
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .login-register .card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .login-register .card p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+  }
+  
+  .login-register .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background-color: #0056b3; /* Darker blue on hover */
+  }
   /* 4. Map / Station Selector */
   .homepage-map {
     background: var(--bg-secondary);

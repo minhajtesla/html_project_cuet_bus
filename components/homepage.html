@@ -5,22 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CUET Transport</title>
   <link rel="stylesheet" href="Homepage.css">
+  <link rel="stylesheet" href="navbar.css">
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
 </head>
 <body>
 
+  <div id="navbar-placeholder"></div>
+  <script>
+    // Dynamically load navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      });
+  </script>
+
   <main class="homepage">
     <!-- Hero Carousel -->
     <section class="hero">
-      <div class="swiper-container hero-swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" style="background-image: url('/images/hero1.jpg');"></div>
-          <div class="swiper-slide" style="background-image: url('/images/hero2.jpg');"></div>
-          <div class="swiper-slide" style="background-image: url('/images/hero3.jpg');"></div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
       <div class="hero-overlay"></div>
       <div class="hero-content fade-in">
         <h1>Welcome to CUET Transport</h1>
@@ -30,6 +33,15 @@
         </a>
       </div>
     </section>
+
+    <!-- Login / Register opens identity modal -->
+    <div class="login-register">
+      <div class="card" id="open-identity-modal">
+        <h3>Login / Register</h3>
+        <p>Access your account or sign up.</p>
+      </div>
+    </div>
+    <div id="identity-modal-placeholder"></div>
 
     <!-- Feature Grid -->
     <section class="features container fade-in">
@@ -44,10 +56,6 @@
       <a href="/notice" class="card">
         <h3>Notices</h3>
         <p>Stay updated with the latest announcements.</p>
-      </a>
-      <a href="/login" class="card">
-        <h3>Login / Register</h3>
-        <p>Access your account or sign up.</p>
       </a>
     </section>
 
@@ -85,7 +93,25 @@
   </main>
 
   <script>
-    // Initialize Google Map
+    // Load and initialize the identity modal
+    fetch('identityModal.html')        // load modal HTML dynamically :contentReference[oaicite:3]{index=3}
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('identity-modal-placeholder').innerHTML = html;
+        const openBtn = document.getElementById('open-identity-modal');
+        const modal   = document.getElementById('identityModal');
+
+        openBtn.addEventListener('click', () => {  // attach click handler :contentReference[oaicite:4]{index=4}
+          modal.style.display = 'flex';
+        });
+
+        // close when clicking the overlay background
+        modal.addEventListener('click', e => {
+          if (e.target === modal) modal.style.display = 'none';
+        });
+      });
+
+    // Initialize Google Map (unchanged)...
     function initMap() {
       const busStations = [
         { id: 1, name: 'CUET Main Gate', position: { lat: 22.4619433, lng: 91.9710592 }, image: '/images/stations/cuet-main.jpg' },
@@ -98,21 +124,19 @@
         center: busStations[0].position,
         zoom: 16
       });
-
       const marker = new google.maps.Marker({
         position: busStations[0].position,
         map: map
       });
 
       document.getElementById("station-select").addEventListener('change', function () {
-        const selectedStation = busStations.find(s => s.id === parseInt(this.value));
-        map.setCenter(selectedStation.position);
-        marker.setPosition(selectedStation.position);
-        document.getElementById("station-name").textContent = selectedStation.name;
-        document.getElementById("station-image").src = selectedStation.image;
+        const s = busStations.find(x => x.id === parseInt(this.value));
+        map.setCenter(s.position);
+        marker.setPosition(s.position);
+        document.getElementById("station-name").textContent = s.name;
+        document.getElementById("station-image").src = s.image;
       });
     }
-
     window.onload = initMap;
   </script>
 </body>
