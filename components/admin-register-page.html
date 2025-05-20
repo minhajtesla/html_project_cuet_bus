@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-logo {
+            height: 40px;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+        }
+        
+        .navbar-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .admin-register-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            padding-top: 60px; /* To account for navbar */
+        }
+        
+        .admin-register-form {
+            display: flex;
+            flex-direction: column;
+            width: 350px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .admin-register-form input,
+        .admin-register-form select {
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .admin-register-form button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        
+        .admin-register-form button:hover {
+            background-color: #45a049;
+        }
+        
+        h3 {
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        
+        .captcha-section {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .captcha-section input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-brand">
+            <img src="/api/placeholder/120/40" alt="CUET Logo" class="navbar-logo">
+        </div>
+        <div class="navbar-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#" id="login-link">Login</a>
+        </div>
+    </div>
+
+    <!-- Admin Registration Page -->
+    <div class="admin-register-page">
+        <h3>Admin Register</h3>
+        <form class="admin-register-form" id="adminRegisterForm">
+            <input
+                type="text"
+                name="adminId"
+                placeholder="Admin ID"
+                required
+            />
+            <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                required
+            />
+            <input
+                type="text"
+                name="contactNo"
+                placeholder="Contact No"
+                required
+            />
+            <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+            />
+            <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+            />
+
+            <div class="captcha-section">
+                <label>
+                    <input
+                        type="checkbox"
+                        id="humanCheck"
+                    />
+                    I'm not a robot
+                </label>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminRegisterForm = document.getElementById('adminRegisterForm');
+            const loginLink = document.getElementById('login-link');
+            
+            // Handle login link click
+            loginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Navigating to admin login page');
+                // In a real application, this would navigate to the login page
+                // window.location.href = '/admin-login';
+            });
+            
+            // Handle form submission
+            adminRegisterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Check if human verification is checked
+                const isHuman = document.getElementById('humanCheck').checked;
+                if (!isHuman) {
+                    alert("Please confirm that you are not a robot.");
+                    return;
+                }
+                
+                // Get form data
+                const formData = new FormData(adminRegisterForm);
+                const adminData = {
+                    adminId: formData.get('adminId'),
+                    name: formData.get('name'),
+                    contactNo: formData.get('contactNo'),
+                    email: formData.get('email'),
+                    password: formData.get('password')
+                };
+                
+                console.log("Registering admin:", adminData);
+                
+                // Simulate API call
+                setTimeout(() => {
+                    alert("Registration successful! Redirecting to login page...");
+                    // In a real application, this would make an actual API call and handle responses
+                    // window.location.href = '/admin-login';
+                }, 1000);
+                
+                /* In a real implementation, you would do something like this:
+                fetch('http://localhost:8080/api/admins/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(adminData),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/admin-login';
+                    } else {
+                        return response.json().then(error => {
+                            throw new Error(error.message || 'An error occurred');
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error registering admin:', error);
+                    alert(error.message || "An error occurred. Please try again later.");
+                });
+                */
+            });
+        });
+    </script>
+</body>
+</html>
