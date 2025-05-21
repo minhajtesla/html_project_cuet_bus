@@ -1,6 +1,6 @@
 /* Homepage.css */
 
-/* 1. Theme Variables (if not already in global) */
+
 :root {
     --bg-dark:         #0f172a;    /* page background */
     --bg-secondary:    #1e293b;    /* containers */
@@ -14,14 +14,14 @@
     --container-gap:   2rem;
   }
   
-  /* 2. Global Reset / Typography */
-  *,
+
+  /* *,
   *::before,
   *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
+  } */
   body {
     background: var(--bg-dark);
     color: var(--text-light);

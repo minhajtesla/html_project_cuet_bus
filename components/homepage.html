@@ -11,15 +11,27 @@
 </head>
 <body>
 
-  <div id="navbar-placeholder"></div>
-  <script>
-    // Dynamically load navbar
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-placeholder').innerHTML = data;
-      });
-  </script>
+  
+  <nav class="navbar">
+    <div class="logo-container">
+      <img 
+        src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
+        alt="CUET logo" 
+        class="logo" 
+      />
+      <div class="header-text">
+        <h1>Chittagong University of Engineering and Technology</h1>
+        <h2>CUET Transport Management App</h2>
+      </div>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/bus-stopages">Bus Stopages</a></li>
+      <li><a href="/bus-seat-booking">Seat Booking</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
+      <li><a href="/feedback">Feedback</a></li>
+    </ul>
+  </nav>
 
   <main class="homepage">
     <!-- Hero Carousel -->
@@ -64,15 +76,15 @@
       <h2>Select a Bus Station</h2>
       <select class="station-dropdown" id="station-select">
         <option value="1">CUET Main Gate</option>
-        <option value="2">Reservoir Stop</option>
-        <option value="3">Faculty Dorms</option>
+        <option value="2">murADPUR</option>
+        <option value="3">nEW MARKET</option>
         <option value="4">Library Roundabout</option>
       </select>
       <div class="map-container" id="map"></div>
-      <div class="station-info">
+      <!-- <div class="station-info">
         <h3 id="station-name">CUET Main Gate</h3>
         <img id="station-image" src="/images/stations/cuet-main.jpg" alt="CUET Main Gate" class="station-image">
-      </div>
+      </div> -->
     </section>
 
     <!-- About & Contact -->
@@ -115,27 +127,14 @@
     function initMap() {
       const busStations = [
         { id: 1, name: 'CUET Main Gate', position: { lat: 22.4619433, lng: 91.9710592 }, image: '/images/stations/cuet-main.jpg' },
-        { id: 2, name: 'Reservoir Stop', position: { lat: 22.4605, lng: 91.9687 }, image: '/images/stations/reservoir.jpg' },
-        { id: 3, name: 'Faculty Dorms', position: { lat: 22.4592, lng: 91.9701 }, image: '/images/stations/dorms.jpg' },
-        { id: 4, name: 'Library Roundabout', position: { lat: 22.4623, lng: 91.9690 }, image: '/images/stations/library.jpg' }
       ];
 
       const map = new google.maps.Map(document.getElementById("map"), {
         center: busStations[0].position,
         zoom: 16
       });
-      const marker = new google.maps.Marker({
-        position: busStations[0].position,
-        map: map
-      });
-
-      document.getElementById("station-select").addEventListener('change', function () {
-        const s = busStations.find(x => x.id === parseInt(this.value));
-        map.setCenter(s.position);
-        marker.setPosition(s.position);
-        document.getElementById("station-name").textContent = s.name;
-        document.getElementById("station-image").src = s.image;
-      });
+      
+      
     }
     window.onload = initMap;
   </script>

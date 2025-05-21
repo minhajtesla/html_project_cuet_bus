@@ -2,7 +2,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
+    background-color: #000000;
     margin: 0;
     display: flex;
     align-items: center;
@@ -11,20 +11,30 @@ body {
   }
   
   .login-container {
-    background: #fff;
+    background: #000000;
+    border: #ccc solid 2px;
+    /* border-shadow: 0 4px 12px rgba(0,0,0,0.1); */
     padding: 2rem;
     border-radius: 8px;
     width: 320px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(243, 233, 233, 0.711);
+  }
+
+  .login-container:hover {
+    transition: all 0.3s ease;
+    background: #34aa5b;
+    color: white;
   }
   
   .login-container h2 {
+    color: white;
     margin-top: 0;
     margin-bottom: 1.5rem;
     text-align: center;
   }
   
   .login-container label {
+    color: white;
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;

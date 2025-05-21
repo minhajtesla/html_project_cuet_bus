@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Driver Login</h2>
+    <form action="/busstaf-dashboard" method="POST">
+      <label for="driver-id" aria-placeholder="driver Id">Driver ID</label>
+      <input type="text" id="driver-id" name="driverId" required>
+      
+      <label for="student-password">Password</label>
+      <input type="password" id="student-password" name="password" required>
+      
+      <button type="submit">Log In</button>
+    </form>
+    <a href="Homepage.html" class="back-link">&larr; Back to Home</a>
+  </div>
+</body>
+</html>
