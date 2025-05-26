@@ -72,11 +72,59 @@
     background: var(--accent-amber);
     transform: translateY(-3px);
   }
-  .login.login-register {
+  .login-register {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
-    margin-left: 200px;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+    background: linear-gradient(135deg, #1e293b 60%, #38bdf8 100%);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px rgba(56,189,248,0.12), 0 1.5px 8px rgba(15,23,42,0.18);
+    padding: 2.5rem 1.5rem;
+    backdrop-filter: blur(2px);
+    border: 1.5px solid rgba(56,189,248,0.12);
+  }
+
+  .login-register .card {
+    min-width: 260px;
+    max-width: 340px;
+    margin: 0.5rem;
+    padding: 2rem 1.5rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #2563eb 60%, #38bdf8 100%);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(56,189,248,0.18), 0 2px 8px rgba(15,23,42,0.18);
+    transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .login-register .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    box-shadow: 0 0 0 2px rgba(251,191,36,0.12);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .login-register .card:hover,
+  .login-register .card:focus {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(56,189,248,0.22), 0 4px 16px rgba(15,23,42,0.22);
+  }
+  .login-register .card:hover::after,
+  .login-register .card:focus::after {
+    opacity: 1;
   }
   
   .login-register .card {
