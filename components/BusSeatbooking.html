@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUET Transport - Seat Booking</title>
+  <style>
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2c3e50;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .header-text h1 {
+      color: white;
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .header-text h2 {
+      color: #3498db;
+      font-size: 0.9rem;
+      margin: 0;
+      font-weight: normal;
+    }
+
+    .navbar-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .navbar-links a:hover {
+      color: #3498db;
+    }
+
+    /* Main Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .main-content {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      text-align: center;
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .booking-container {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .bus-info {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    .bus-info h2 {
+      color: #2c3e50;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .bus-info p {
+      color: #7f8c8d;
+      margin: 0;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f8f9fa;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 2px solid #ddd;
+    }
+
+    .available { background-color: #e74c3c; }
+    .occupied { background-color: #27ae60; }
+    .selected { background-color: #3498db; }
+
+    /* Bus Layout */
+    .bus-layout {
+      background: #34495e;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .bus-front {
+      background: #2c3e50;
+      height: 60px;
+      border-radius: 15px 15px 0 0;
+      margin: -2rem -2rem 1rem -2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .driver-area {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background: #95a5a6;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .seats-container {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .seat {
+      width: 45px;
+      height: 45px;
+      border-radius: 8px;
+      border: 2px solid #bdc3c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .seat.available {
+      background-color: #e74c3c;
+      color: white;
+      border-color: #c0392b;
+    }
+
+    .seat.available:hover {
+      background-color: #c0392b;
+      transform: scale(1.1);
+    }
+
+    .seat.occupied {
+      background-color: #27ae60;
+      color: white;
+      border-color: #229954;
+      cursor: not-allowed;
+    }
+
+    .seat.selected {
+      background-color: #3498db;
+      color: white;
+      border-color: #2980b9;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+    }
+
+    .aisle {
+      width: 40px;
+      text-align: center;
+      color: #95a5a6;
+      font-size: 10px;
+    }
+
+    /* Booking Summary */
+    .booking-summary {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .booking-summary h3 {
+      color: #2c3e50;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .selected-seats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+
+    .selected-seat-tag {
+      background: #3498db;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .booking-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: #3498db;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #95a5a6;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #7f8c8d;
+    }
+
+    .btn:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .total-info {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin: 1rem 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .navbar-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .main-content {
+        padding: 1rem;
+      }
+
+      .page-title {
+        font-size: 2rem;
+      }
+
+      .legend {
+        gap: 1rem;
+      }
+
+      .booking-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .header-text h1 {
+        font-size: 1rem;
+      }
+
+      .header-text h2 {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo-container">
+      <img 
+        src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
+        alt="CUET logo" 
+        class="logo" 
+      />
+      <div class="header-text">
+        <h1>Chittagong University of Engineering and Technology</h1>
+        <h2>CUET Transport Management App</h2>
+      </div>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="Busstopage.html">Bus Stopages</a></li>
+      <li><a href="BusSeatbooking.html">Seat Booking</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
+      <li><a href="/feedback">Feedback</a></li>
+    </ul>
+</nav>
+
+<div class="main-content">
+    <h1 class="page-title">Bus Seat Booking</h1>
+    
+    <div class="booking-container">
+        <div class="bus-info">
+            <h2>CUET Transport Bus - Route: Campus to City</h2>
+            <p>Total Seats: 50 | Available: <span id="availableCount">32</span> | Occupied: <span id="occupiedCount">18</span></p>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color available"></div>
+                <span>Available</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color occupied"></div>
+                <span>Occupied</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color selected"></div>
+                <span>Selected</span>
+            </div>
+        </div>
+
+        <!-- Bus Layout -->
+        <div class="bus-layout">
+            <div class="bus-front">🚌 FRONT</div>
+            <div class="driver-area">👨‍✈️</div>
+            
+            <div class="seats-container" id="seatsContainer">
+                <!-- Seats will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="booking-summary">
+            <h3>Booking Summary</h3>
+            <div class="selected-seats" id="selectedSeats">
+                <span style="color: #7f8c8d;">No seats selected</span>
+            </div>
+            <div class="total-info">
+                Total Amount: ৳<span id="totalAmount">0</span>
+            </div>
+            <div class="booking-actions">
+                <button class="btn btn-secondary" onclick="clearSelection()">Clear Selection</button>
+                <button class="btn btn-primary" id="bookBtn" onclick="bookSeats()" disabled>Book Selected Seats</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SEAT_PRICE = 25; // Price per seat in Taka
+    let selectedSeats = [];
+    
+    // Randomly occupied seats (you can modify this based on your backend data)
+    const occupiedSeats = [2, 5, 8, 12, 15, 18, 23, 26, 29, 33, 36, 39, 42, 45, 48, 3, 7, 11];
+    
+    function generateSeats() {
+        const container = document.getElementById('seatsContainer');
+        container.innerHTML = '';
+        
+        for (let i = 1; i <= 50; i++) {
+            const seat = document.createElement('div');
+            seat.className = 'seat';
+            seat.textContent = i;
+            seat.id = `seat-${i}`;
+            
+            // Determine seat status
+            if (occupiedSeats.includes(i)) {
+                seat.classList.add('occupied');
+                seat.title = `Seat ${i} - Occupied`;
+            } else {
+                seat.classList.add('available');
+                seat.title = `Seat ${i} - Available (৳${SEAT_PRICE})`;
+                seat.onclick = () => toggleSeat(i);
+            }
+            
+            container.appendChild(seat);
+            
+            // Add aisle space after every 4th seat in a row (except last column)
+            if (i % 4 === 2 && i <= 48) {
+                const aisle = document.createElement('div');
+                aisle.className = 'aisle';
+                aisle.textContent = '🚶';
+                container.appendChild(aisle);
+            }
+        }
+        
+        updateCounts();
+    }
+    
+    function toggleSeat(seatNumber) {
+        const seat = document.getElementById(`seat-${seatNumber}`);
+        
+        if (seat.classList.contains('occupied')) {
+            return; // Can't select occupied seats
+        }
+        
+        if (selectedSeats.includes(seatNumber)) {
+            // Deselect seat
+            selectedSeats = selectedSeats.filter(s => s !== seatNumber);
+            seat.classList.remove('selected');
+            seat.classList.add('available');
+        } else {
+            // Select seat
+            selectedSeats.push(seatNumber);
+            seat.classList.remove('available');
+            seat.classList.add('selected');
+        }
+        
+        updateBookingSummary();
+    }
+    
+    function updateBookingSummary() {
+        const selectedSeatsContainer = document.getElementById('selectedSeats');
+        const totalAmountSpan = document.getElementById('totalAmount');
+        const bookBtn = document.getElementById('bookBtn');
+        
+        if (selectedSeats.length === 0) {
+            selectedSeatsContainer.innerHTML = '<span style="color: #7f8c8d;">No seats selected</span>';
+            totalAmountSpan.textContent = '0';
+            bookBtn.disabled = true;
+        } else {
+            selectedSeatsContainer.innerHTML = selectedSeats
+                .sort((a, b) => a - b)
+                .map(seat => `<div class="selected-seat-tag">Seat ${seat}</div>`)
+                .join('');
+            
+            totalAmountSpan.textContent = selectedSeats.length * SEAT_PRICE;
+            bookBtn.disabled = false;
+        }
+    }
+    
+    function clearSelection() {
+        selectedSeats.forEach(seatNumber => {
+            const seat = document.getElementById(`seat-${seatNumber}`);
+            seat.classList.remove('selected');
+            seat.classList.add('available');
+        });
+        
+        selectedSeats = [];
+        updateBookingSummary();
+    }
+    
+    function bookSeats() {
+        if (selectedSeats.length === 0) {
+            alert('Please select at least one seat!');
+            return;
+        }
+        
+        const confirmation = confirm(
+            `Confirm booking for ${selectedSeats.length} seat(s)?\n` +
+            `Seats: ${selectedSeats.sort((a, b) => a - b).join(', ')}\n` +
+            `Total Amount: ৳${selectedSeats.length * SEAT_PRICE}`
+        );
+        
+        if (confirmation) {
+            // Mark selected seats as occupied
+            selectedSeats.forEach(seatNumber => {
+                const seat = document.getElementById(`seat-${seatNumber}`);
+                seat.classList.remove('selected');
+                seat.classList.add('occupied');
+                seat.onclick = null;
+                seat.title = `Seat ${seatNumber} - Occupied`;
+                occupiedSeats.push(seatNumber);
+            });
+            
+            alert('Booking confirmed! Thank you for choosing CUET Transport.');
+            selectedSeats = [];
+            updateBookingSummary();
+            updateCounts();
+        }
+    }
+    
+    function updateCounts() {
+        const availableCount = 50 - occupiedSeats.length;
+        document.getElementById('availableCount').textContent = availableCount;
+        document.getElementById('occupiedCount').textContent = occupiedSeats.length;
+    }
+    
+    // Initialize the seat layout when page loads
+    window.addEventListener('load', generateSeats);
+</script>
+
+</body>
+</html>
