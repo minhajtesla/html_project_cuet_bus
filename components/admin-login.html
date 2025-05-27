@@ -1,25 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Login</title>
-  <link rel="stylesheet" href="login.css">
-</head>
-<body>
-  <div class="login-container">
-    <h2>Admin Login</h2>
-    <form action="/admin-dashboard" method="POST">
-      <label for="admin-username">Username</label>
-      <input type="text" id="admin-username" name="username" required>
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <link rel="stylesheet" href="navbar.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <title>Admin Login</title> 
+  <!-- <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    
+
+    /* Login Container Styles */
+    .login-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #e74c3c, #c0392b);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #2c3e50;
+      font-size: 2rem;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .login-box h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #e74c3c, #c0392b);
+      border-radius: 2px;
+    }
+
+    .admin-icon {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 4rem;
+      color: #e74c3c;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+      background: white;
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #7f8c8d;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .back-link:hover {
+      color: #2c3e50;
+      transform: translateX(-5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+      }
+
+      .logo-container {
+        justify-content: center;
+      }
+
+      .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .header-text h1 {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      .header-text h2 {
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      .login-box {
+        padding: 40px 30px;
+        margin: 20px;
+      }
+
+      .login-box h2 {
+        font-size: 1.7rem;
+      }
+
+      .admin-icon {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 20px 10px;
+      }
+
+      .login-box {
+        padding: 30px 20px;
+      }
+
+      .navbar-links {
+        gap: 10px;
+      }
+
+      .navbar-links a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+  </style> -->
+</head> 
+<body> 
+  <nav class="navbar">
+    <div class="logo-container">
+      <img 
+        src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
+        alt="CUET logo" 
+        class="logo" 
+      />
+      <div class="header-text">
+        <h1>Chittagong University of Engineering and Technology</h1>
+        <h2>CUET Transport Management App</h2>
+      </div>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="Busstopage.html">Bus Stopages</a></li>
+      <li><a href="BusSeatbooking.html">Seat Booking</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
+      <li><a href="Feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+  
+  <div class="login-container"> 
+    <div class="login-box">
+      <div class="admin-icon">👨‍💼</div>
+      <h2>Admin Login</h2> 
       
-      <label for="admin-password">Password</label>
-      <input type="password" id="admin-password" name="password" required>
+      <form action="admin-profile.html" method="POST"> 
+        <div class="form-group">
+          <label for="admin-id">Admin ID</label> 
+          <input type="text" id="admin-id" name="adminId" required placeholder="Enter your admin ID"> 
+        </div>
+         
+        <div class="form-group">
+          <label for="admin-password">Password</label> 
+          <input type="password" id="admin-password" name="password" required placeholder="Enter your password"> 
+        </div>
+         
+        <button type="submit" class="login-btn" >
+          <a href="admin-profile.html" class="back-link">
+        <span>&larr;</span> LOGIN
+      </a>
+        </button> 
+      </form> 
       
-      <button type="submit">Log In</button>
-      <button type="button" onclick="window.location.href='admin-register-page.html'">Register</button>
-    </form>
-    <a href="Homepage.html" class="back-link">&larr; Back to Home</a>
-  </div>
-</body>
+      <a href="homepage.html" class="back-link">
+        <span>&larr;</span> Back to Home
+      </a>
+    </div>
+  </div> 
+</body> 
 </html>

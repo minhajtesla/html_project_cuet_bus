@@ -1,193 +1,105 @@
+/* :root {
+  --primary-color: #0055A4;
+  --accent-color: #FFC20E;
+  --text-color: #ffffff;
+  --nav-height: 60px;
+  --transition-duration: 0.3s;
+}
+
 .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #2c3e50;
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  padding: 0 1rem;
+  background: rgba(0, 102, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.logo-container .logo {
+  height: 40px;
+  width: auto;
+}
+.header-text h1 {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.2;
+}
+.header-text h2 {
+  font-size: 0.75rem;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.2;
+}
 
-    .logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.navbar-links li {
+  list-style: none;
+}
+.navbar-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-duration) ease;
+}
+.navbar-links a:hover {
+  color: var(--accent-color);
+}
+.navbar-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-color);
+  border-radius: 2px;
+  transition: width var(--transition-duration) ease;
+}
+.navbar-links a:focus {
+  outline: 2px dashed var(--accent-color);
+  outline-offset: 2px;
+}
 
-    .header-text h1 {
-      color: white;
-      font-size: 1.2rem;
-      margin: 0;
-    }
+/* .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: var(--text-color);
+} */
 
-    .header-text h2 {
-      color: #3498db;
-      font-size: 0.9rem;
-      margin: 0;
-      font-weight: normal;
-    }
-
-    .navbar-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar-links a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .navbar-links a:hover {
-      color: #3498db;
-    }
-
-    /* Homepage Styles */
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-    }
-
-    .main-content {
-      text-align: center;
-      padding: 3rem 2rem;
-      color: white;
-    }
-
-    .main-content h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .main-content p {
-      font-size: 1.2rem;
-      margin-bottom: 3rem;
-      opacity: 0.9;
-    }
-
-    /* Bus Stopages Section */
-    .stopages-section {
-      padding: 4rem 2rem;
-      background: white;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #2c3e50;
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 4px;
-      background: #3498db;
-      margin: 1rem auto;
-      border-radius: 2px;
-    }
-
-    .stopages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .stopage-card {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid #e8e8e8;
-    }
-
-    .stopage-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    }
-
-    .stopage-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-bottom: 3px solid #3498db;
-    }
-
-    .stopage-content {
-      padding: 1.5rem;
-    }
-
-    .stopage-name {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #2c3e50;
-      margin-bottom: 0.5rem;
-    }
-
-    .stopage-destination {
-      color: #3498db;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-    }
-
-    .stopage-location {
-      color: #7f8c8d;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-
-    .location-icon {
-      color: #e74c3c;
-      margin-right: 0.5rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-      }
-
-      .navbar-links {
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .main-content h1 {
-        font-size: 2rem;
-      }
-
-      .header-text h1 {
-        font-size: 1rem;
-      }
-
-      .header-text h2 {
-        font-size: 0.8rem;
-      }
-
-      .stopages-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
-      }
-    }
+/* @media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  } */
+  /* .navbar-links.show {
+    display: flex;
+  } */
+  /* .menu-toggle {
+    display: block;
+  } */ */

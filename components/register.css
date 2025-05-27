@@ -1,0 +1,258 @@
+/* Registration Page Styles */
+
+* {
+  box-sizing: border-box;
+  margin: 50px;
+  padding: 0;
+}
+
+/* body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+} */
+
+.login-container {
+    margin-top: 250px;
+  background: rgb(1, 1, 1);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-container label {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="email"],
+.login-container input[type="tel"],
+.login-container input[type="password"],
+.login-container select {
+  padding: 12px 15px;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="email"]:focus,
+.login-container input[type="tel"]:focus,
+.login-container input[type="password"]:focus,
+.login-container select:focus {
+  outline: none;
+  border-color: #667eea;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-container select {
+  cursor: pointer;
+}
+
+.login-container select option {
+  padding: 10px;
+}
+
+.login-container button[type="submit"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.login-container button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.login-container button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.register-section,
+.login-section {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e1e1e1;
+}
+
+.register-section p,
+.login-section p {
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.register-btn,
+.login-link {
+  display: inline-block;
+  background: #28a745;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.register-btn:hover,
+.login-link:hover {
+  background: #218838;
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: white;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 25px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+
+.back-link:hover {
+  color: #764ba2;
+  text-decoration: none;
+}
+
+/* Form Validation Styles */
+.login-container input:invalid {
+  border-color: #dc3545;
+}
+
+.login-container input:valid {
+  border-color: #28a745;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  .login-container {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+  
+  .login-container h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+  
+  .login-container input[type="text"],
+  .login-container input[type="email"],
+  .login-container input[type="tel"],
+  .login-container input[type="password"],
+  .login-container select {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .login-container button[type="submit"] {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 25px 15px;
+  }
+  
+  .login-container h2 {
+    font-size: 22px;
+  }
+  
+  .login-container form {
+    gap: 15px;
+  }
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Enhanced Focus States */
+.login-container input:focus + .input-helper,
+.login-container select:focus + .input-helper {
+  color: #667eea;
+  font-size: 12px;
+}
+
+/* Loading State for Submit Button */
+.login-container button[type="submit"]:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success/Error Message Styles */
+.message {
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

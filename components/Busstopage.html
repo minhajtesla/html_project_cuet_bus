@@ -5,15 +5,134 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CUET Transport</title>
   
-      <link rel="stylesheet" href="Homepage.css">
-  <link rel="stylesheet" href="navbar.css">
-  
+  <!-- <link rel="stylesheet" href="Homepage.css"> -->
+  <!-- <link rel="stylesheet" href="navbar.css"> -->
+
+  <!-- <style>
+    /* ——— Homepage Styles Update ——— */
+
+    /* Full-page gradient background */
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+
+    /* Center wrapper */
+    .main-content, .stopages-section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    /* Hero area */
+    .main-content {
+      text-align: center;
+      padding: 60px 30px;
+    }
+    .main-content h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+    .main-content p {
+      font-size: 1.1rem;
+      color: #555;
+      opacity: 0.9;
+    }
+
+    /* Section title */
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #2c3e50;
+      padding: 30px 20px 10px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #2980b9;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* Bus stopage cards grid */
+    .stopages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 30px;
+    }
+
+    /* Individual stopage card styling */
+    .stopage-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+    .stopage-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    .stopage-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 3px solid #2980b9;
+    }
+    .stopage-content {
+      padding: 20px;
+    }
+    .stopage-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+    .stopage-destination {
+      font-size: 1rem;
+      color: #2980b9;
+      margin-bottom: 12px;
+    }
+    .stopage-location {
+      color: #555;
+      line-height: 1.5;
+    }
+    .location-icon {
+      margin-right: 6px;
+      color: #e74c3c;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .main-content, .stopages-section {
+        margin: 20px 10px;
+      }
+      .main-content h1 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+    }
+  </style> -->
+
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
 </head>
 <body>
 
-<nav class="navbar">
+  <nav class="navbar">
     <div class="logo-container">
       <img 
         src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
@@ -32,103 +151,101 @@
       <li><a href="/contact-us">Contact Us</a></li>
       <li><a href="/feedback">Feedback</a></li>
     </ul>
-</nav>
+  </nav>
 
-<div class="main-content">
+  <div class="main-content">
     <h1>Welcome to CUET Transport</h1>
     <p>Your one-stop solution for all transportation needs.</p>
-</div>
+  </div>
 
-<section class="stopages-section">
+  <section class="stopages-section">
     <h2 class="section-title">Bus Stopages</h2>
     <div class="stopages-grid">
-        
-        <!-- Stopage 1 -->
-        <div class="stopage-card">
-            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=250&fit=crop" alt="New Market" class="stopage-image">
-            <div class="stopage-content">
-                <div class="stopage-name">New Market</div>
-                <div class="stopage-destination">Destination: CUET Campus</div>
-                <div class="stopage-location">
-                    <span class="location-icon">📍</span>
-                    New Market Road, Chittagong - 4000<br>
-                    Near Central Plaza Shopping Mall
-                </div>
-            </div>
+      <!-- Stopage 1 -->
+      <div class="stopage-card">
+        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=250&fit=crop" alt="New Market" class="stopage-image">
+        <div class="stopage-content">
+          <div class="stopage-name">New Market</div>
+          <div class="stopage-destination">Destination: CUET Campus</div>
+          <div class="stopage-location">
+            <span class="location-icon">📍</span>
+            New Market Road, Chittagong - 4000<br>
+            Near Central Plaza Shopping Mall
+          </div>
         </div>
+      </div>
 
-        <!-- Stopage 2 -->
-        <div class="stopage-card">
-            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=250&fit=crop" alt="GEC Circle" class="stopage-image">
-            <div class="stopage-content">
-                <div class="stopage-name">GEC Circle</div>
-                <div class="stopage-destination">Destination: CUET Campus</div>
-                <div class="stopage-location">
-                    <span class="location-icon">📍</span>
-                    GEC Circle, Chittagong - 4203<br>
-                    Main intersection near GEC University
-                </div>
-            </div>
+      <!-- Stopage 2 -->
+      <div class="stopage-card">
+        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=250&fit=crop" alt="GEC Circle" class="stopage-image">
+        <div class="stopage-content">
+          <div class="stopage-name">GEC Circle</div>
+          <div class="stopage-destination">Destination: CUET Campus</div>
+          <div class="stopage-location">
+            <span class="location-icon">📍</span>
+            GEC Circle, Chittagong - 4203<br>
+            Main intersection near GEC University
+          </div>
         </div>
+      </div>
 
-        <!-- Stopage 3 -->
-        <div class="stopage-card">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop" alt="Oxygen Intersection" class="stopage-image">
-            <div class="stopage-content">
-                <div class="stopage-name">Oxygen Intersection</div>
-                <div class="stopage-destination">Destination: CUET Campus</div>
-                <div class="stopage-location">
-                    <span class="location-icon">📍</span>
-                    Oxygen More, Chittagong - 4203<br>
-                    Major shopping area intersection
-                </div>
-            </div>
+      <!-- Stopage 3 -->
+      <div class="stopage-card">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop" alt="Oxygen Intersection" class="stopage-image">
+        <div class="stopage-content">
+          <div class="stopage-name">Oxygen Intersection</div>
+          <div class="stopage-destination">Destination: CUET Campus</div>
+          <div class="stopage-location">
+            <span class="location-icon">📍</span>
+            Oxygen More, Chittagong - 4203<br>
+            Major shopping area intersection
+          </div>
         </div>
+      </div>
 
-        <!-- Stopage 4 -->
-        <div class="stopage-card">
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=250&fit=crop" alt="Muradpur Bus Stand" class="stopage-image">
-            <div class="stopage-content">
-                <div class="stopage-name">Muradpur Bus Stand</div>
-                <div class="stopage-destination">Destination: CUET Campus</div>
-                <div class="stopage-location">
-                    <span class="location-icon">📍</span>
-                    Muradpur, Chittagong - 4212<br>
-                    Main bus terminal area
-                </div>
-            </div>
+      <!-- Stopage 4 -->
+      <div class="stopage-card">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=250&fit=crop" alt="Muradpur Bus Stand" class="stopage-image">
+        <div class="stopage-content">
+          <div class="stopage-name">Muradpur Bus Stand</div>
+          <div class="stopage-destination">Destination: CUET Campus</div>
+          <div class="stopage-location">
+            <span class="location-icon">📍</span>
+            Muradpur, Chittagong - 4212<br>
+            Main bus terminal area
+          </div>
         </div>
+      </div>
 
-        <!-- Stopage 5 -->
-        <div class="stopage-card">
-            <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=400&h=250&fit=crop" alt="Agrabad Commercial Area" class="stopage-image">
-            <div class="stopage-content">
-                <div class="stopage-name">Agrabad Commercial Area</div>
-                <div class="stopage-destination">Destination: CUET Campus</div>
-                <div class="stopage-location">
-                    <span class="location-icon">📍</span>
-                    Agrabad C/A, Chittagong - 4100<br>
-                    Near Port City International University
-                </div>
-            </div>
+      <!-- Stopage 5 -->
+      <div class="stopage-card">
+        <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=400&h=250&fit=crop" alt="Agrabad Commercial Area" class="stopage-image">
+        <div class="stopage-content">
+          <div class="stopage-name">Agrabad Commercial Area</div>
+          <div class="stopage-destination">Destination: CUET Campus</div>
+          <div class="stopage-location">
+            <span class="location-icon">📍</span>
+            Agrabad C/A, Chittagong - 4100<br>
+            Near Port City International University
+          </div>
         </div>
+      </div>
 
-        <!-- Stopage 6 -->
-        <div class="stopage-card">
-            <img src="https://images.unsplash.com/photo-1494522358652-f30e61a60313?w=400&h=250&fit=crop" alt="Chittagong Medical College" class="stopage-image">
-            <div class="stopage-content">
-                <div class="stopage-name">Medical College Gate</div>
-                <div class="stopage-destination">Destination: CUET Campus</div>
-                <div class="stopage-location">
-                    <span class="location-icon">📍</span>
-                    Medical College Road, Chittagong - 4203<br>
-                    Main entrance of Chittagong Medical College
-                </div>
-            </div>
+      <!-- Stopage 6 -->
+      <div class="stopage-card">
+        <img src="https://images.unsplash.com/photo-1494522358652-f30e61a60313?w=400&h=250&fit=crop" alt="Chittagong Medical College" class="stopage-image">
+        <div class="stopage-content">
+          <div class="stopage-name">Medical College Gate</div>
+          <div class="stopage-destination">Destination: CUET Campus</div>
+          <div class="stopage-location">
+            <span class="location-icon">📍</span>
+            Medical College Road, Chittagong - 4203<br>
+            Main entrance of Chittagong Medical College
+          </div>
         </div>
-
+      </div>
     </div>
-</section>
+  </section>
 
 </body>
 </html>

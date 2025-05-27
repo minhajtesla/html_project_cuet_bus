@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 500px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .register-header {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .staff-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .register-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .register-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .register-form {
+            padding: 40px 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #28a745;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #adb5bd;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .register-button:hover {
+            background: linear-gradient(135deg, #20c997, #28a745);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+        }
+
+        .register-button:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: #6c757d;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-text {
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .login-button:hover {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-home a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-home a:hover {
+            color: #2c3e50;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .password-requirements {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .register-header {
+                padding: 30px 20px;
+            }
+
+            .staff-icon {
+                font-size: 3rem;
+            }
+
+            .register-title {
+                font-size: 1.5rem;
+            }
+
+            .register-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo-container">
+      <img 
+        src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
+        alt="CUET logo" 
+        class="logo" 
+      />
+      <div class="header-text">
+        <h1>Chittagong University of Engineering and Technology</h1>
+        <h2>CUET Transport Management App</h2>
+      </div>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="Busstopage.html">Bus Stopages</a></li>
+      <li><a href="BusSeatbooking.html">Seat Booking</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
+      <li><a href="Feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+
+
+    <div class="register-container">
+        <div class="register-header">
+            <span class="staff-icon">📝</span>
+            <div class="register-title">Staff Registration</div>
+            <div class="register-subtitle">Create your staff account</div>
+        </div>
+        
+        <div class="register-form">
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+            
+            <form id="staffRegisterForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Administration">Administration</option>
+                            <option value="Security">Security</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="IT Support">IT Support</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <select id="position" name="position" required>
+                            <option value="">Select Position</option>
+                            <option value="Driver">Driver</option>
+                            <option value="Conductor">Conductor</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Mechanic">Mechanic</option>
+                            <option value="Admin Assistant">Admin Assistant</option>
+                            <option value="Security Guard">Security Guard</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employeeId">Employee ID (Optional)</label>
+                    <input type="text" id="employeeId" name="employeeId" placeholder="Enter existing employee ID">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    <div class="password-requirements">
+                        Password must be at least 6 characters long
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                
+                <button type="submit" class="register-button">
+                    ✅ Register
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="login-section">
+                <div class="login-text">Already have an account?</div>
+                <a href="staff-login.html" class="login-button">
+                    🔐 Login to Your Account
+                </a>
+            </div>
+            
+            <div class="back-home">
+                <a href="homepage.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(message, type) {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            // Hide both messages first
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            if (type === 'error') {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            } else if (type === 'success') {
+                successDiv.textContent = message;
+                successDiv.style.display = 'block';
+            }
+            
+            // Auto hide message after 5 seconds
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function generateStaffId(department, position) {
+            const deptCode = department.substring(0, 3).toUpperCase();
+            const posCode = position.substring(0, 3).toUpperCase();
+            const randomNum = Math.floor(Math.random() * 999) + 1;
+            return `${deptCode}${posCode}${String(randomNum).padStart(3, '0')}`;
+        }
+
+        function validateForm(formData) {
+            // Check if all required fields are filled
+            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'department', 'position', 'password', 'confirmPassword'];
+            
+            for (let field of requiredFields) {
+                if (!formData.get(field) || formData.get(field).trim() === '') {
+                    return { valid: false, message: 'Please fill in all required fields' };
+                }
+            }
+            
+            // Validate email format
+            const email = formData.get('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return { valid: false, message: 'Please enter a valid email address' };
+            }
+            
+            // Validate phone number
+            const phone = formData.get('phone');
+            if (phone.length < 10) {
+                return { valid: false, message: 'Phone number must be at least 10 digits' };
+            }
+            
+            // Validate password
+            const password = formData.get('password');
+            if (password.length < 6) {
+                return { valid: false, message: 'Password must be at least 6 characters long' };
+            }
+            
+            // Check password confirmation
+            const confirmPassword = formData.get('confirmPassword');
+            if (password !== confirmPassword) {
+                return { valid: false, message: 'Passwords do not match' };
+            }
+            
+            return { valid: true };
+        }
+
+        document.getElementById('staffRegisterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const validation = validateForm(formData);
+            
+            if (!validation.valid) {
+                showMessage(validation.message, 'error');
+                return;
+            }
+            
+            // Generate staff ID
+            const department = formData.get('department');
+            const position = formData.get('position');
+            const staffId = generateStaffId(department, position);
+            
+            // Simulate registration process
+            const staffData = {
+                staffId: staffId,
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                department: department,
+                position: position,
+                employeeId: formData.get('employeeId') || 'Not provided',
+                registrationDate: new Date().toLocaleDateString()
+            };
+            
+            // Store in localStorage for demo purposes
+            let registeredStaff = JSON.parse(localStorage.getItem('registeredStaff') || '[]');
+            registeredStaff.push(staffData);
+            localStorage.setItem('registeredStaff', JSON.stringify(registeredStaff));
+            
+            showMessage(`Registration successful! Your Staff ID is: ${staffId}`, 'success');
+            
+            // Clear form
+            this.reset();
+            
+            // Redirect to login page after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'staff-login.html';
+            }, 3000);
+        });
+
+        // Clear messages when user starts typing
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                document.getElementById('errorMessage').style.display = 'none';
+            });
+        });
+
+        // Real-time password confirmation validation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.style.borderColor = '#dc3545';
+            } else {
+                this.style.borderColor = '#e9ecef';
+            }
+        });
+    </script>
+</body>
+</html>

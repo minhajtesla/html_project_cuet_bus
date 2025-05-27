@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="navbar.css">
+    <!-- <link rel="stylesheet" href="navbar.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Login</title>
+    <title>Staff Login</title>
     <!-- <style>
         * {
             margin: 0;
@@ -51,7 +51,7 @@
             position: relative;
         }
 
-        .student-icon {
+        .staff-icon {
             font-size: 4rem;
             margin-bottom: 15px;
             display: block;
@@ -235,7 +235,7 @@
                 padding: 30px 20px;
             }
 
-            .student-icon {
+            .staff-icon {
                 font-size: 3rem;
             }
 
@@ -274,19 +274,19 @@
 
     <div class="login-container">
         <div class="login-header">
-            <span class="student-icon">🎓</span>
-            <div class="login-title">Student Login</div>
-            <div class="login-subtitle">Access your student dashboard</div>
+            <span class="staff-icon">👨‍💼</span>
+            <div class="login-title">Staff Login</div>
+            <div class="login-subtitle">Access your staff dashboard</div>
         </div>
         
         <div class="login-form">
             <div class="error-message" id="errorMessage"></div>
             <div class="success-message" id="successMessage"></div>
             
-            <form id="studentLoginForm">
+            <form id="staffLoginForm">
                 <div class="form-group">
-                    <label for="studentId">Student ID</label>
-                    <input type="text" id="studentId" name="studentId" placeholder="Enter your student ID" required>
+                    <label for="staffId">Staff ID</label>
+                    <input type="text" id="staffId" name="staffId" placeholder="Enter your staff ID" required>
                 </div>
                 
                 <div class="form-group">
@@ -294,7 +294,12 @@
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
                 
-                <button type="submit" class="login-button">🔐 Login</button>
+                <button type="submit" class="login-button">
+                    <a href="staff-profile.html" class="register-button">
+                     🔐 Login
+                </a>
+                   
+                </button>
             </form>
             
             <div class="divider">
@@ -303,7 +308,9 @@
             
             <div class="register-section">
                 <div class="register-text">Don't have an account?</div>
-                <a href="register.html" class="register-button">📝 Register as Student</a>
+                <a href="registerstaff.html" class="register-button">
+                    📝 Register as Staff
+                </a>
             </div>
             
             <div class="back-home">
@@ -313,40 +320,78 @@
     </div>
 
     <script>
-        // Sample student credentials
-        const studentAccounts = [
-            { studentId: 'stu001', password: '123' },
-            { studentId: 'stu002', password: 'student@2025' }
+        // Sample staff credentials for demonstration
+        const staffAccounts = [
+            { staffId: 'staf1', password: '123' },
+            { staffId: 'STAFF002', password: 'staff@2024' },
+            { staffId: 'DRIVER001', password: 'driver123' }
         ];
 
         function showMessage(message, type) {
-            const err = document.getElementById('errorMessage');
-            const suc = document.getElementById('successMessage');
-            err.style.display = 'none'; suc.style.display = 'none';
-            if (type === 'error') { err.textContent = message; err.style.display = 'block'; }
-            else { suc.textContent = message; suc.style.display = 'block'; }
-            setTimeout(() => { err.style.display = 'none'; suc.style.display = 'none'; }, 5000);
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            // Hide both messages first
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            if (type === 'error') {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            } else if (type === 'success') {
+                successDiv.textContent = message;
+                successDiv.style.display = 'block';
+            }
+            
+            // Auto hide message after 5 seconds
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+                successDiv.style.display = 'none';
+            }, 5000);
         }
 
-        document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
+        document.getElementById('staffLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const id = document.getElementById('studentId').value.trim();
-            const pw = document.getElementById('password').value;
-            if (!id || !pw) { showMessage('Please fill in all fields', 'error'); return; }
-            const valid = studentAccounts.find(a => a.studentId === id && a.password === pw);
-            if (valid) {
+            
+            const staffId = document.getElementById('staffId').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Basic validation
+            if (!staffId || !password) {
+                showMessage('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Check credentials
+            const validAccount = staffAccounts.find(account => 
+                account.staffId === staffId && account.password === password
+            );
+            
+            if (validAccount) {
                 showMessage('Login successful! Redirecting...', 'success');
-                sessionStorage.setItem('currentStudent', JSON.stringify({ studentId: id, loginTime: new Date().toLocaleString() }));
-                setTimeout(() => window.location.href = 'student-profile.html', 2000);
+                
+                // Store staff info for the profile page
+                sessionStorage.setItem('currentStaff', JSON.stringify({
+                    staffId: staffId,
+                    loginTime: new Date().toLocaleString()
+                }));
+                
+                // Redirect to staff profile page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'staff-profile.html';
+                }, 2000);
             } else {
-                showMessage('Invalid Student ID or Password', 'error');
+                showMessage('Invalid Staff ID or Password', 'error');
             }
         });
 
-        ['studentId','password'].forEach(id => {
-            document.getElementById(id).addEventListener('input', () => {
-                document.getElementById('errorMessage').style.display = 'none';
-            });
+        // Clear messages when user starts typing
+        document.getElementById('staffId').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
         });
     </script>
 </body>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <!-- <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .profile-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .profile-page > p {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 30px;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-container {
+            padding: 40px;
+        }
+
+        .profile-detailss {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .profile-detailss p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .profile-detailss p:last-child {
+            margin-bottom: 0;
+        }
+
+        .profile-detailss strong {
+            color: #2c3e50;
+            font-weight: 600;
+            display: inline-block;
+            width: 130px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            min-width: 180px;
+        }
+
+        .seat-booking-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .seat-booking-button:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .back-home-button {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        .back-home-button:hover {
+            background: linear-gradient(135deg, #5a6268, #6c757d);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .profile-page {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .profile-page > p {
+                font-size: 1.5rem;
+                padding: 20px;
+            }
+
+            .profile-container {
+                padding: 20px;
+            }
+
+            .profile-detailss {
+                padding: 20px;
+            }
+
+            .profile-detailss strong {
+                width: 110px;
+                font-size: 0.95rem;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .profile-detailss p {
+                font-size: 1rem;
+            }
+
+            .profile-detailss strong {
+                width: 100px;
+                font-size: 0.9rem;
+            }
+        }
+    </style> -->
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo-container">
+      <img 
+        src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
+        alt="CUET logo" 
+        class="logo" 
+      />
+      <div class="header-text">
+        <h1>Chittagong University of Engineering and Technology</h1>
+        <h2>CUET Transport Management App</h2>
+      </div>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="Busstopage.html">Bus Stopages</a></li>
+      <li><a href="BusSeatbooking.html">Seat Booking</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
+      <li><a href="Feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+    <div class="profile-page">
+        <p>
+            Student Profile
+        </p>
+        <div class="profile-container">
+            <div class="profile-detailss">
+                <p>
+                    <strong>Student ID:</strong> <span id="studentId">STU001234</span>
+                </p>
+                <p>
+                    <strong>Name:</strong> <span id="studentName">John Doe</span>
+                </p>
+                <p>
+                    <strong>Department:</strong> <span id="department">Computer Science</span>
+                </p>
+                <p>
+                    <strong>Batch:</strong> <span id="batch">2024</span>
+                </p>
+                <p>
+                    <strong>Gender:</strong> <span id="gender">Male</span>
+                </p>
+                <p>
+                    <strong>Contact No:</strong> <span id="contactNo">+1 234 567 8900</span>
+                </p>
+                <p>
+                    <strong>Email:</strong> <span id="email">john.doe@university.edu</span>
+                </p>
+            </div>
+            <div class="profile-actions">
+                <a href="bus-schedule.html" class="button seat-booking-button">
+                    Go to Seat Booking
+                </a>
+                <a href="index.html" class="button back-home-button">
+                    ← Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample function to update student data dynamically
+        function updateStudentData(data) {
+            document.getElementById('studentId').textContent = data.studentId || 'STU001234';
+            document.getElementById('studentName').textContent = data.name || 'John Doe';
+            document.getElementById('department').textContent = data.department || 'Computer Science';
+            document.getElementById('batch').textContent = data.batch || '2024';
+            document.getElementById('gender').textContent = data.gender || 'Male';
+            document.getElementById('contactNo').textContent = data.contactNo || '+1 234 567 8900';
+            document.getElementById('email').textContent = data.email || 'john.doe@university.edu';
+        }
+
+        // Example usage:
+        // updateStudentData({
+        //     studentId: 'STU001235',
+        //     name: 'Jane Smith',
+        //     department: 'Engineering',
+        //     batch: '2023',
+        //     gender: 'Female',
+        //     contactNo: '+1 234 567 8901',
+        //     email: 'jane.smith@university.edu'
+        // });
+    </script>
+</body>
+</html>

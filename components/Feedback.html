@@ -2,99 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Feedback Form</title>
-    <title>CUET Transport</title>
-  <link rel="stylesheet" href="Homepage.css">
-  <link rel="stylesheet" href="navbar.css">
+    <title>Feedback - CUET Transport</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="Homepage.css">
+    <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="Feedback.css">
 </head>
 <body>
-    <nav class="navbar">
+
+<nav class="navbar">
     <div class="logo-container">
-      <img 
-        src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
-        alt="CUET logo" 
-        class="logo" 
-      />
-      <div class="header-text">
-        <h1>Chittagong University of Engineering and Technology</h1>
-        <h2>CUET Transport Management App</h2>
-      </div>
+        <img 
+            src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
+            alt="CUET logo" 
+            class="logo" 
+        />
+        <div class="header-text">
+            <h1>Chittagong University of Engineering and Technology</h1>
+            <h2>CUET Transport Management App</h2>
+        </div>
     </div>
     <ul class="navbar-links">
-      <li><a href="homepage.html">Home</a></li>
-      <li><a href="Busstopage.html">Bus Stopages</a></li>
-      <li><a href="BusSeatbooking.html">Seat Booking</a></li>
-      <li><a href="/contact-us">Contact Us</a></li>
-      <li><a href="Feedback.html">Feedback</a></li>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="Busstopage.html">Bus Stopages</a></li>
+        <li><a href="BusSeatbooking.html">Seat Booking</a></li>
+        <li><a href="/contact-us">Contact Us</a></li>
+        <li><a href="Feedback.html" class="active">Feedback</a></li>
     </ul>
-  </nav>
-    <div class="feedback-container">
-        <h2>Feedback Form</h2>
-        <p class="feedback-message" id="feedbackMessage"></p>
-        <form class="feedback-form" id="feedbackForm">
-            <label for="name">Name</label>
-            <input
-                type="text"
-                id="name"
-                class="form-control"
-                placeholder="Your Name"
-            />
-            <label for="email">Email</label>
-            <input
-                type="email"
-                id="email"
-                class="form-control"
-                placeholder="name@example.com"
-            />
-            <label for="text">Feedback</label>
-            <textarea
-                id="text"
-                class="form-control"
-                placeholder="Write your feedback here"
-                rows="4"
-            ></textarea>
-            <button type="submit" class="submit-button">
-                Submit Feedback
-            </button>
-        </form>
-    </div>
+</nav>
 
-    <script>
-        const form = document.getElementById('feedbackForm');
-        const messageElem = document.getElementById('feedbackMessage');
+<div class="feedback-container">
+    <h2>Feedback Form</h2>
+    <p class="feedback-message" id="feedbackMessage"></p>
+    <form class="feedback-form" id="feedbackForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Your Name" />
 
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const text = document.getElementById('text').value.trim();
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="name@example.com" />
 
-            if (!name || !email || !text) {
-                messageElem.textContent = 'All fields are required!';
-                return;
+        <label for="text">Feedback</label>
+        <textarea id="text" class="form-control" placeholder="Write your feedback here" rows="4"></textarea>
+
+        <button type="submit" class="submit-button">Submit Feedback</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('feedbackForm');
+    const messageElem = document.getElementById('feedbackMessage');
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const text = document.getElementById('text').value.trim();
+
+        if (!name || !email || !text) {
+            messageElem.textContent = 'All fields are required!';
+            return;
+        }
+
+        const feedbackData = { name, email, text };
+
+        try {
+            const response = await fetch('http://localhost:8080/api/feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(feedbackData)
+            });
+
+            if (response.ok) {
+                messageElem.textContent = '✅ Thank you for your feedback!';
+                messageElem.style.color = 'green';
+                form.reset();
+            } else {
+                messageElem.textContent = '❌ Failed to submit feedback. Please try again later.';
+                messageElem.style.color = 'red';
             }
+        } catch (error) {
+            console.error('Error:', error);
+            messageElem.textContent = '❌ Failed to submit feedback. Please try again later.';
+            messageElem.style.color = 'red';
+        }
+    });
+</script>
 
-            const feedbackData = { name, email, text };
-
-            try {
-                const response = await fetch('http://localhost:8080/api/feedback', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(feedbackData)
-                });
-
-                if (response.ok) {
-                    messageElem.textContent = 'Thank you for your feedback!';
-                    form.reset();
-                } else {
-                    messageElem.textContent = 'Failed to submit feedback. Please try again later.';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                messageElem.textContent = 'Failed to submit feedback. Please try again later.';
-            }
-        });
-    </script>
 </body>
 </html>

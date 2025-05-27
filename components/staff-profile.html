@@ -1,0 +1,178 @@
+<!-- staff-profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Staff Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="navbar.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height:100vh; padding:20px;
+    }
+    .profile-page {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .page-header {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      color: white;
+      text-align: center;
+      padding: 30px;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .profile-container {
+      padding: 30px;
+    }
+    .staff-profile {
+      background: #f1f1f1;
+      border-left: 5px solid #27ae60;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .staff-profile h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #2c3e50;
+    }
+    .staff-profile p {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+    .staff-profile strong {
+      display:inline-block;
+      width:120px;
+      font-weight:600;
+      color:#2c3e50;
+    }
+    .location-update {
+      margin-bottom: 30px;
+    }
+    .location-update label {
+      font-weight:600;
+      margin-bottom:5px;
+      display:block;
+      color:#333;
+    }
+    .location-update input {
+      width: calc(100% - 110px);
+      padding:8px;
+      border:1px solid #ccc;
+      border-radius:5px;
+      margin-right:10px;
+    }
+    .location-update button {
+      padding:9px 15px;
+      background:#2980b9;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .location-update button:hover {
+      background:#1c5980;
+    }
+    .reset-section {
+      text-align:center;
+      margin-bottom: 20px;
+    }
+    .reset-section button {
+      padding:12px 25px;
+      background:#e74c3c;
+      color:white;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:600;
+    }
+    .reset-section button:hover {
+      background:#992d22;
+    }
+    @media (max-width:600px) {
+      .location-update input { width:100%; margin-bottom:10px; }
+      .location-update button { width:100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo-container">
+      <img 
+        src="https://seeklogo.com/images/C/chittagong-university-of-engineering-and-technolog-logo-27727AB3FD-seeklogo.com.png" 
+        alt="CUET logo" class="logo"
+      />
+      <div class="header-text">
+        <h1>Chittagong University of Engineering and Technology</h1>
+        <h2>CUET Transport Management App</h2>
+      </div>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="Busstopage.html">Bus Stopages</a></li>
+      <li><a href="BusSeatbooking.html">Seat Booking</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
+      <li><a href="Feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-page">
+    <div class="page-header">
+      <span>👷</span> Staff Profile
+    </div>
+    <div class="profile-container">
+      <div class="staff-profile">
+        <h3><span>👤</span> Staff Details</h3>
+        <p><strong>Name:</strong> Md. Saiful Islam</p>
+        <p><strong>Staff ID:</strong> STF1023</p>
+        <p><strong>Role:</strong> Conductor</p>
+        <p><strong>Assigned Bus:</strong> DHK-CUET-B05</p>
+      </div>
+
+      <div class="location-update">
+        <label for="current-location">Current Location</label>
+        <input type="text" id="current-location" placeholder="e.g. Main Gate, CUET">
+        <button onclick="updateLocation()">Update Location</button>
+      </div>
+
+      <div class="reset-section">
+        <button onclick="resetSeats()">Reset Seats</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateLocation() {
+      const loc = document.getElementById('current-location').value.trim();
+      if (!loc) {
+        alert('Please enter a location.');
+        return;
+      }
+      // TODO: send `loc` to server via AJAX/fetch
+      alert('Location updated to: ' + loc);
+    }
+
+    function resetSeats() {
+      // TODO: send reset request to server
+      if (confirm('Are you sure you want to reset all seats for your bus?')) {
+        alert('Seats have been reset.');
+      }
+    }
+  </script>
+</body>
+</html>
